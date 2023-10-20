@@ -1,5 +1,6 @@
 
 # Marta
+Marta is a real person acting as a bot to serve real people's needs.
 
 ## Features
 
