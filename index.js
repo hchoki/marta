@@ -34,5 +34,22 @@ client.on('voiceStateUpdate', (oldState, newState) => {
   }
 });
 
+
+client.on('messageCreate', message => {
+  if (message.author.bot) return;
+
+  const twitterRegex = /https?:\/\/(www\.)?twitter\.com\/[^\s]*/g;
+  const foundLinks = message.content.match(twitterRegex);
+  
+  if (foundLinks) {
+      let replyText = "";
+      for (let link of foundLinks) {
+          let convertedLink = link.replace('twitter.com', 'vxtwitter.com');
+          replyText += `${convertedLink}\n`;
+      }
+      message.reply(replyText);
+  }
+});
+
 // Log in with the bot token
 client.login(process.env.TOKEN);
