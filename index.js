@@ -41,8 +41,8 @@ client.on('messageCreate', message => {
   const twitterRegex = /https?:\/\/(www\.)?twitter\.com\/[^\s]*/g;
   const foundLinks = message.content.match(twitterRegex);
   
-  if (foundLinks) {
-      let replyText = "";
+  if (message.embeds.length == 0 && foundLinks) {
+    let replyText = "";
       for (let link of foundLinks) {
           let convertedLink = link.replace('twitter.com', 'vxtwitter.com');
           replyText += `${convertedLink}\n`;
