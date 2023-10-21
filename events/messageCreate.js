@@ -10,6 +10,6 @@ module.exports = (client, message) => {
       const convertedLink = link.replace(/(twitter\.com|x\.com)/, 'vxtwitter.com');
       replyText += `${convertedLink}\n`;
     }
-    message.reply('Teste:/n'+replyText);
+    message.reply(replyText);
   }
 };
