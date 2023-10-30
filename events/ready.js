@@ -2,7 +2,7 @@ const schedule = require('node-schedule');
 const steamVRFestivalMessages = require('./resources/steamVRFestivalMessages');
 
 function getTimeLeft() {
-	const eventDate = new Date('2023-04-12T18:00:00');
+	const eventDate = new Date('2023-12-04T18:00:00');
 	const now = new Date();
 	const timeLeft = eventDate - now;
 
