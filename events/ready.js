@@ -1,50 +1,48 @@
 const schedule = require('node-schedule');
-const moment = require('moment');
+const steamVRFestivalMessages = require('./resources/steamVRFestivalMessages');
 
-module.exports = {
-	name: 'ready',
-	once: true,
-	execute(client) {
-		const targetDate = moment('2023-12-04', 'YYYY-MM-DD');
-		schedule.scheduleJob('0 18 * * *', () => {
-			const today = moment();
-			const daysLeft = targetDate.diff(today, 'days');
+function getTimeLeft() {
+	const eventDate = new Date('2023-04-12T18:00:00');
+	const now = new Date();
+	const timeLeft = eventDate - now;
 
-			const messages = [
-				`Faltam apenas ${daysLeft} dias! Prepare-se para mergulhar na realidade virtual como nunca antes com o Steam VR Festival! 🎮🕶️`,
-				`Está quase na hora! Apenas ${daysLeft} dias para o lançamento do incrível novo headset VR da Steam! #SteamVRFestival`,
-				`A contagem regressiva está rolando! Marque no seu calendário, faltam só ${daysLeft} dias para o Steam VR Festival! 🚀`,
-				`Prepare-se para ser surpreendido! Apenas ${daysLeft} dias para a revolução da realidade virtual no Steam VR Festival! 👾`,
-				`Está quase lá! Apenas ${daysLeft} dias nos separam do Steam VR Festival e do novo headset VR da Steam! 🎉`,
-				`Não consegue esperar? Nós também não! Apenas ${daysLeft} dias para o Steam VR Festival! 🙌`,
-				`Sinta a emoção no ar! O Steam VR Festival está a apenas ${daysLeft} dias de distância! 🤖`,
-				`Fique pronto para uma experiência inesquecível! Apenas ${daysLeft} dias para o Steam VR Festival! 🎮`,
-				`A contagem regressiva começou! Faltam apenas ${daysLeft} dias para o lançamento do novo headset VR no Steam VR Festival! 🕶️`,
-				`Preparado para a revolução VR? O Steam VR Festival está chegando em apenas ${daysLeft} dias! 🚀`,
-				`A realidade virtual como você nunca viu antes, em apenas ${daysLeft} dias no Steam VR Festival! 🎉`,
-				`É hora de se preparar! O Steam VR Festival e o novo headset VR estão chegando em ${daysLeft} dias! 🎮`,
-				`A aventura VR está quase começando! Faltam apenas ${daysLeft} dias para o Steam VR Festival! 🕶️`,
-				`Contagem regressiva para a diversão! Apenas ${daysLeft} dias para o Steam VR Festival! 🎉`,
-				`A espera está quase acabando! O Steam VR Festival está chegando em ${daysLeft} dias! 🎮`,
-				`Fique pronto para explorar novos mundos! Apenas ${daysLeft} dias para o Steam VR Festival! 🕶️`,
-				`A nova era da realidade virtual está quase aqui! Faltam ${daysLeft} dias para o Steam VR Festival! 🎉`,
-				`Prepare-se para uma experiência VR inovadora no Steam VR Festival em apenas ${daysLeft} dias! 🎮`,
-				`A contagem regressiva para a diversão está rolando! Faltam apenas ${daysLeft} dias para o Steam VR Festival! 🕶️`,
-				`Não perca! O Steam VR Festival e o novo headset VR estão chegando em ${daysLeft} dias! 🎉`,
-			];
+	const daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+	const hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
+	return { daysLeft, hoursLeft };
+}
 
-			const randomIndex = Math.floor(Math.random() * messages.length);
-			const message = messages[randomIndex];
-			const channel = client.channels.cache.get('1102758639732801586');
-			if (channel) {
-				channel.send(message);
-			}
-			else {
-				console.error('O canal para a contagem regressiva não foi encontrado');
-			}
-		});
+function sendMessage(client, channelId) {
+	const { daysLeft, hoursLeft } = getTimeLeft();
+	const randomIndex = Math.floor(Math.random() * steamVRFestivalMessages.length);
+	const messageTemplate = steamVRFestivalMessages[randomIndex];
+	const message = messageTemplate
+		.replace('${daysLeft}', daysLeft)
+		.replace('${hoursLeft}', hoursLeft);
 
-		console.log('Mensagem diária aleatória agendada.');
-	},
+	const channel = client.channels.cache.get(channelId);
+	if (channel) {
+		channel.send(message);
+	}
+	else {
+		console.error(`Channel with ID ${channelId} not found`);
+	}
+}
+
+module.exports = (client) => {
+	const channelId = '1102758639732801586';
+	// Send a message every day at 6 PM
+	schedule.scheduleJob('0 18 * * *', () => {
+		sendMessage(client, channelId);
+	});
+
+	schedule.scheduleJob('*/45 * * * *', () => {
+		const voiceChannels = client.channels.cache.filter(c => c.type === 'GUILD_VOICE');
+		const hasMembers = voiceChannels.some(voiceChannel => voiceChannel.members.size > 0);
+
+		if (hasMembers) {
+			sendMessage(client, channelId);
+		}
+	});
+
 };
