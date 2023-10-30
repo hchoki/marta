@@ -20,6 +20,10 @@ function sendMessage(client, channelId) {
 }
 
 module.exports = (client) => {
+	client.user.setPresence({
+		activities: [{ name: 'Esperando a Valve fazer algo', type: 4 }],
+	});
+
 	const channelId = '1102758639732801586';
 	// Send a message every day at 6 PM
 	schedule.scheduleJob('0 18 * * *', () => {
