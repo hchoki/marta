@@ -57,13 +57,4 @@ module.exports = (client) => {
 	schedule.scheduleJob('0 18 * * *', () => {
 		sendMessage(client, channelId);
 	});
-
-	schedule.scheduleJob('*/45 * * * *', () => {
-		const voiceChannels = client.channels.cache.filter(c => c.type === 'GUILD_VOICE');
-		const hasMembers = voiceChannels.some(voiceChannel => voiceChannel.members.size > 0);
-
-		if (hasMembers) {
-			sendMessage(client, channelId);
-		}
-	});
 };
