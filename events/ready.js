@@ -66,5 +66,4 @@ module.exports = (client) => {
 			sendMessage(client, channelId);
 		}
 	});
-
 };
