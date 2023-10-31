@@ -10,10 +10,6 @@ const client = new Client({
 	],
 });
 
-client.once('ready', () => {
-	console.log('Ready!');
-});
-
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
