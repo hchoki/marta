@@ -1,5 +1,5 @@
 const schedule = require('node-schedule');
-const { getMessage } = require('../resources/steamVRMessages');
+const getMessage = require('../resources/steamVRMessages');
 
 module.exports = (client) => {
 	client.user.setPresence({

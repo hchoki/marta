@@ -1,4 +1,4 @@
-const { getMessage } = require('../resources/steamVRMessages');
+const getMessage = require('../resources/steamVRMessages');
 module.exports = (client, message) => {
 	if (message.author.bot) return;
 

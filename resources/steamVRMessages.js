@@ -14,7 +14,7 @@ function getTimeLeft(eventDate) {
 	return { daysLeft, hoursLeft, minutesLeft };
 }
 
-module.exports = function getMessage(eventDate) {
+module.exports = (eventDate) => {
 	const { daysLeft, hoursLeft, minutesLeft } = getTimeLeft(eventDate);
 	const messages = [
 		`Falta apenas ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o início do Steam VR Festival! A ansiedade está a mil! 🎉`,
