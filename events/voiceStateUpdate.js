@@ -1,16 +1,16 @@
 module.exports = (client, oldState, newState) => {
 	const username = newState.member ? newState.member.user.tag : oldState.member.user.tag;
 	const timestamp = Math.floor(new Date().getTime() / 1000);
-	let message = '';
+	let message = `<t:${timestamp}:R> | `;
 
 	if (!oldState.channelId && newState.channelId) {
-		message = `<t:${timestamp}:R> | ${username} entrou no canal ${newState.channel.name}.`;
+		message = `${username} entrou no canal ${newState.channel.name}.`;
 	}
 	else if (oldState.channelId && !newState.channelId) {
-		message = `<t:${timestamp}:R> | ${username} saiu do canal ${oldState.channel.name}.`;
+		message = `${username} saiu do canal ${oldState.channel.name}.`;
 	}
 	else if (oldState.channelId !== newState.channelId) {
-		message = `<t:${timestamp}:R> | ${username} trocou do canal ${oldState.channel.name} para ${newState.channel.name}.`;
+		message = `${username} trocou do canal ${oldState.channel.name} para ${newState.channel.name}.`;
 	}
 
 	if (message) {
