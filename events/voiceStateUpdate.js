@@ -7,7 +7,7 @@ module.exports = (client, oldState, newState) => {
 		message += `<t:${timestamp}:R> | ${username} entrou no canal ${newState.channel.name}.`;
 	}
 	else if (oldState.channelId && !newState.channelId) {
-		message += `<t:${timestamp}:R> | ${username} saiu do canal ${oldState.channel.name} para ir falar com os amigos dele.`;
+		message += `<t:${timestamp}:R> | ${username} saiu do canal ${oldState.channel.name} para ir falar com os amigos dele(a).`;
 	}
 	else if (oldState.channelId !== newState.channelId) {
 		message += `<t:${timestamp}:R> |${username} trocou do canal ${oldState.channel.name} para ${newState.channel.name}.`;
