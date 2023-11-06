@@ -19,4 +19,10 @@ module.exports = (client, message) => {
 	if (vrRelatedWords.test(message.content)) {
 		message.reply(getMessage('2023-12-04T18:00:00'));
 	}
+
+	// Cat message logic
+	const catWords = /cat|gato|gatito|meow|choki|owo/i;
+	if (catWords.test(message.content)) {
+		message.reply(`https://cataas.com/cat?a=${+Math.floor(Math.random() * 9999)}`);
+	}
 };
