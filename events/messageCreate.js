@@ -21,7 +21,7 @@ module.exports = (client, message) => {
 	}
 
 	// Cat message logic
-	const catWords = /cat|gato|gatito|meow|choki|owo/i;
+	const catWords = /(cat|gat|meow|choki|owo)/i;
 	if (catWords.test(message.content)) {
 		message.reply(`https://cataas.com/cat?a=${+Math.floor(Math.random() * 9999)}`);
 	}
