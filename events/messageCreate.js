@@ -9,18 +9,19 @@ module.exports = (client, message) => {
 		message.reply('Te fuder quietinho ai seu maluco.');
 	}
 
-
 	const linkRegex = /https?:\/\/(www\.)?(twitter\.com|x\.com)\/[^\s]+/g;
 	const foundLinks = message.content.match(linkRegex);
 
 	if (message.embeds.length === 0 && foundLinks) {
 		let replyText = '';
 		for (let link of foundLinks) {
-			link = link.replace(/(twitter\.com|x\.com)(\/photos\/\d+)?/, 'vxtwitter.com');
+			link = link.replace(/(twitter\.com|x\.com)/, 'vxtwitter.com');
+			link = link.replace(/\/photos\/\d+$/, '');
 			replyText += `${link}\n`;
 		}
 		message.reply(replyText);
 	}
+
 
 	// VR message logic
 	const vrRelatedWords = /\b(vr|rv|virtual|reality|deckard|decard|pico|quest(pro)?\d*)\b/i;
