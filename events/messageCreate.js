@@ -9,14 +9,15 @@ module.exports = (client, message) => {
 		message.reply('Te fuder quietinho ai seu maluco.');
 	}
 
-	const linkRegex = /https?:\/\/(www\.)?(twitter\.com|x\.com)\/[^\s]*/g;
+
+	const linkRegex = /https?:\/\/(www\.)?(twitter\.com|x\.com)\/[^\s]+/g;
 	const foundLinks = message.content.match(linkRegex);
 
 	if (message.embeds.length === 0 && foundLinks) {
 		let replyText = '';
-		for (const link of foundLinks) {
-			const convertedLink = link.replace(/(twitter\.com|x\.com)/, 'vxtwitter.com');
-			replyText += `${convertedLink}\n`;
+		for (let link of foundLinks) {
+			link = link.replace(/(twitter\.com|x\.com)(\/photos\/\d+)?/, 'vxtwitter.com');
+			replyText += `${link}\n`;
 		}
 		message.reply(replyText);
 	}
