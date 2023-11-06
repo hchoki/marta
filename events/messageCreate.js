@@ -16,7 +16,7 @@ module.exports = (client, message) => {
 		let replyText = '';
 		for (let link of foundLinks) {
 			link = link.replace(/(twitter\.com|x\.com)/, 'vxtwitter.com');
-			link = link.replace(/\/photos\/\d+$/, '');
+			link = link.replace(/\/photo\/\d+$/, '');
 			replyText += `${link}\n`;
 		}
 		message.reply(replyText);
