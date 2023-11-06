@@ -15,7 +15,7 @@ module.exports = (client, message) => {
 	}
 
 	// VR message logic
-	const vrRelatedWords = /valve|deckard|quest|vr|pico/i;
+	const vrRelatedWords = /valve|deckard|quest|\bvr\b|pico/i;
 	if (vrRelatedWords.test(message.content)) {
 		message.reply(getMessage('2023-12-04T18:00:00'));
 	}
