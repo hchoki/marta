@@ -41,13 +41,12 @@ module.exports = (client, message) => {
 		const startExercise = (repeatCount) => {
 			if (repeatCount === 0) return;
 
-			message.channel.send('Prende').then((sentMessage) => {
+			message.channel.send('Prende', { tts: true }).then((sentMessage) => {
 				const updateMessage = (secondsLeft) => {
 					if (secondsLeft === 0) {
-						sentMessage.edit('Solta').then(() => {
+						message.channel.send('Solta', { tts: true }).then(() => {
 							if (repeatCount > 1) {
 								setTimeout(() => {
-									sentMessage.edit('Prende');
 									startExercise(repeatCount - 1);
 								}, 5000);
 							}
