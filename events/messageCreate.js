@@ -37,21 +37,33 @@ module.exports = (client, message) => {
 
 	// Pompoarismo
 	if (message.content.toLowerCase().includes('pompoarismo')) {
-		const sendTimedMessages = (repeatCount) => {
+		// Function to handle the sending and editing of timed messages
+		const startExercise = (repeatCount) => {
 			if (repeatCount === 0) return;
 
-			message.channel.send('Prende').then(() => {
-				setTimeout(() => {
-					message.channel.send('Solta').then(() => {
-						setTimeout(() => {
-							sendTimedMessages(repeatCount - 1);
-						}, 5000);
-					});
-				}, 5000);
+			message.channel.send('Prende').then((sentMessage) => {
+				const updateMessage = (secondsLeft) => {
+					if (secondsLeft === 0) {
+						sentMessage.edit('Solta').then(() => {
+							if (repeatCount > 1) {
+								setTimeout(() => {
+									sentMessage.edit('Prende');
+									startExercise(repeatCount - 1);
+								}, 5000);
+							}
+							return;
+						});
+					}
+					else {
+						sentMessage.edit('Prende' + '.'.repeat(5 - secondsLeft)).then(() => {
+							setTimeout(() => updateMessage(secondsLeft - 1), 1000);
+						});
+					}
+				};
+				updateMessage(5);
 			});
 		};
 
-		// Start the first set of timed messages
-		sendTimedMessages(5);
+		startExercise(5);
 	}
 };
