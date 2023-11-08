@@ -34,4 +34,24 @@ module.exports = (client, message) => {
 	if (catWords.test(message.content)) {
 		message.reply(`https://cataas.com/cat?a=${+Math.floor(Math.random() * 9999)}`);
 	}
+
+	// Pompoarismo
+	if (message.content.toLowerCase().includes('pompoarismo')) {
+		const sendTimedMessages = (repeatCount) => {
+			if (repeatCount === 0) return;
+
+			message.channel.send('Prende').then(() => {
+				setTimeout(() => {
+					message.channel.send('Solta').then(() => {
+						setTimeout(() => {
+							sendTimedMessages(repeatCount - 1);
+						}, 5000);
+					});
+				}, 5000);
+			});
+		};
+
+		// Start the first set of timed messages
+		sendTimedMessages(5);
+	}
 };
