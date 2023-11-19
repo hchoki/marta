@@ -2,10 +2,10 @@ const getMessage = require('../resources/steamVRMessages');
 module.exports = (client, message) => {
 	if (message.author.bot) return;
 
-	if (Math.random() < 0.03) {
+	if (Math.random() <= 0.03) {
 		message.reply('E ai mané, beleza?');
 	}
-	if (Math.random() < 0.001) {
+	if (Math.random() <= 0.001) {
 		message.reply('Te fuder quietinho ai seu maluco.');
 	}
 
