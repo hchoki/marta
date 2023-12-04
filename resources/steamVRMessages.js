@@ -14,32 +14,48 @@ function getTimeLeft(eventDate) {
 	return { daysLeft, hoursLeft, minutesLeft };
 }
 
-module.exports = (eventDate) => {
-	const { daysLeft, hoursLeft, minutesLeft } = getTimeLeft(eventDate);
-	const messages = [
-		`Falta apenas ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o início do Steam VR Festival! A ansiedade está a mil! 🎉`,
-		`Está chegando! Steam VR Festival em ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos! Prepare seu headset! 🕶️`,
-		`A realidade virtual nunca mais será a mesma! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! 🎮`,
-		`Contagem regressiva: ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos e ${minutesLeft} minutos para o Steam VR Festival! Você está pronto? 💻`,
-		`O futuro da VR está batendo à porta! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! 🚀`,
-		`Prepare-se para uma imersão como nunca antes! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos até o Steam VR Festival! 🎧`,
-		`Falta pouco! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para descobrir as novidades do Steam VR Festival! 🔥`,
-		`Você está tão animado quanto nós? ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! 🎉`,
-		`A espera está quase acabando! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! ⏰`,
-		`Conte os minutos! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival começar! 🎊`,
-		`Prepare seu setup! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! 💻`,
-		`A revolução da realidade virtual está chegando! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! 🕶️`,
-		`Está quase na hora! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! 🎮`,
-		`Fique atento! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! ⏳`,
-		`O mundo da VR está prestes a mudar! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! 🌎`,
-		`Prepare-se para a aventura VR do ano! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! 🎢`,
-		`Está quase na hora de colocar seu headset! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! 🕶️`,
-		`O Steam VR Festival está chegando! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos restantes! 🎮`,
-		`Prepare-se para experiências incríveis em VR! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! 💻`,
-		`A contagem regressiva está quase no fim! ${daysLeft} dias e ${hoursLeft} horas e ${minutesLeft} minutos para o Steam VR Festival! ⏱️`,
-		'https://tenor.com/view/me-waiting-for-valve-deckard-valve-deckard-skeleton-wheelchair-gif-15912588111334799418',
-	];
+function getTimePast(eventDate) {
+    	const targetDate = new Date(eventDate);
+    	const now = new Date();
+    	const timePast = now - targetDate;
 
-	const randomIndex = Math.floor(Math.random() * messages.length);
-	return messages[randomIndex];
+    	if (timePast < 0) {
+        	return { daysLeft: 0, hoursLeft: 0, minutesLeft: 0 };
+    	}
+
+    	const daysPast = Math.floor(timePast / (1000 * 60 * 60 * 24));
+    	const hoursPast = Math.floor((timePast % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    	const minutesPast = Math.floor((timePast % (1000 * 60 * 60)) / (1000 * 60));
+
+    	return { daysPast, hoursPast, minutesPast };
+}
+
+module.exports = (eventDate) => {
+    	const { daysPast, hoursPast, minutesPast } = getTimePast(eventDate);
+    	const messages = [
+        	`Fazem ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos que aconteceu o Steam VR Festival! Nada mudou 🎉`,
+        	`Já se passaram ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos desde o Steam VR Festival! Você sente falta? 🕶️`,
+        	`O Steam VR Festival foi há ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos atrás! Como o tempo voa! 🎮`,
+        	`Já faz ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos desde o Steam VR Festival! Você está pronto para o próximo? 💻`,
+        	`O futuro da VR chegou há ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos! O que mudou desde o Steam VR Festival? 🚀`,
+        	`Fazem ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos desde a última imersão no Steam VR Festival! 🎧`,
+        	`Desde o Steam VR Festival já se passaram ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos! Pronto para mais? 🔥`,
+        	`Faz ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos que o Steam VR Festival aconteceu! Bons momentos! 🎉`,
+        	`O Steam VR Festival foi há ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos! Como você se lembra dele? ⏰`,
+        	`Já se passaram ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos desde o início do último Steam VR Festival! 🎊`,
+        	`Seu setup mudou desde o último Steam VR Festival de ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos atrás? 💻`,
+        	`A revolução da realidade virtual começou há ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos, no Steam VR Festival! 🕶️`,
+        	`Já se passaram ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos desde o Steam VR Festival! 🎮`,
+        	`Fazem ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos que o Steam VR Festival aconteceu! Fique atento para o próximo! ⏳`,
+        	`O mundo da VR mudou há ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos com o Steam VR Festival! 🌎`,
+        	`Fazem ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos que vivemos a aventura do Steam VR Festival do ano! 🎢`,
+        	`O último Steam VR Festival foi há ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos! Saudades? 🕶️`,
+        	`O Steam VR Festival terminou há ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos! Continuamos na expectativa do próximo! 🎮`,
+        	`Fazem ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos que experimentamos o Steam VR Festival! 💻`,
+        	`Desde o Steam VR Festival, já se passaram ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos! ⏱️`,
+        	'https://tenor.com/view/me-waiting-for-valve-deckard-valve-deckard-skeleton-wheelchair-gif-15912588111334799418',
+    	];
+
+   	const randomIndex = Math.floor(Math.random() * messages.length);
+    	return messages[randomIndex];
 };
