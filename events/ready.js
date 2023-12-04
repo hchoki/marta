@@ -3,7 +3,7 @@ const getMessage = require('../resources/steamVRMessages');
 
 module.exports = (client) => {
 	client.user.setPresence({
-		activities: [{ name: 'Esperando a Valve fazer algo', type: 4 }],
+		activities: [{ name: 'Deprimida porque a Valve não fez nada', type: 4 }],
 	});
 
 	// Send a message every day at 6 PM
