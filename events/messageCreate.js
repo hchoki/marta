@@ -12,13 +12,14 @@ module.exports = (client, message) => {
 	const linkRegex = /https?:\/\/(www\.)?(twitter\.com|x\.com)\/[^\s]+/g;
 	const foundLinks = message.content.match(linkRegex);
 
-	if (message.embeds.length === 0 && foundLinks) {
+	if (foundLinks) {
 		let replyText = '';
 		for (let link of foundLinks) {
 			link = link.replace(/(twitter\.com|x\.com)/, 'vxtwitter.com');
 			link = link.replace(/\/photo\/\d+$/, '');
 			replyText += `${link}\n`;
 		}
+		message.suppressEmbeds(true);
 		message.reply(replyText);
 	}
 
