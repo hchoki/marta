@@ -26,7 +26,7 @@ module.exports = (client, message) => {
 	}
 
 	// Gumroad message logic
-	const linkRegexGumroad = /https?:\/\/(www\.)?gumroad\.com\/l\/[^\s]+/g;
+	const linkRegexGumroad = /https?:\/\/[^\s.]+\.gumroad\.com\/l\/[^\s]+/g;
 	const foundLinksGumroad = message.content.match(linkRegexGumroad);
 
 	if (foundLinksGumroad) {
