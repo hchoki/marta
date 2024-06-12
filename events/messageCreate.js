@@ -9,14 +9,31 @@ module.exports = (client, message) => {
 		message.reply('Te fuder quietinho ai seu maluco.');
 	}
 
-	const linkRegex = /https?:\/\/(www\.)?(twitter\.com|x\.com)\/[^\s]+/g;
-	const foundLinks = message.content.match(linkRegex);
 
-	if (foundLinks) {
+	//Twitter message logic
+	const linkRegexTwitter = /https?:\/\/(www\.)?(twitter\.com|x\.com)\/[^\s]+/g;
+	const foundLinksTwitter = message.content.match(linkRegexTwitter);
+
+	if (foundLinksTwitter) {
 		let replyText = '';
-		for (let link of foundLinks) {
+		for (let link of foundLinksTwitter) {
 			link = link.replace(/(twitter\.com|x\.com)/, 'vxtwitter.com');
 			link = link.replace(/\/photo\/\d+$/, '');
+			replyText += `${link}\n`;
+		}
+		message.suppressEmbeds(true);
+		message.reply(replyText);
+	}
+
+	// Gumroad message logic
+	const linkRegexGumroad = /https?:\/\/(www\.)?gumroad\.com\/l\/[^\s]+/g;
+	const foundLinksGumroad = message.content.match(linkRegexGumroad);
+
+	if (foundLinksGumroad) {
+		let replyText = '';
+		for (let link of foundLinksGumroad) {
+			link = link.split('?')[0]; // Remove all parameters after ?
+			link += '?a=918906067'; // Append the specified parameter
 			replyText += `${link}\n`;
 		}
 		message.suppressEmbeds(true);
