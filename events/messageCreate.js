@@ -25,6 +25,20 @@ module.exports = (client, message) => {
 		message.reply(replyText);
 	}
 
+	// TikTok message logic
+	const linkRegexTikTok = /https?:\/\/(www\.)?tiktok\.com\/[^\s]+/g;
+	const foundLinksTikTok = message.content.match(linkRegexTikTok);
+
+	if (foundLinksTikTok) {
+		let replyText = '';
+		for (let link of foundLinksTikTok) {
+			link = link.replace('tiktok.com', 'vxtiktok.com');
+			replyText += `${link}\n`;
+		}
+		message.suppressEmbeds(true);
+		message.reply(replyText);
+	}
+
 	// Gumroad message logic
 	const linkRegexGumroad = /https?:\/\/[^\s.]+\.gumroad\.com\/l\/[^\s]+/g;
 	const foundLinksGumroad = message.content.match(linkRegexGumroad);
