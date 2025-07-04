@@ -17,7 +17,7 @@ module.exports = (client, message) => {
 	if (foundLinksTwitter) {
 		let replyText = '';
 		for (let link of foundLinksTwitter) {
-			link = link.replace(/(twitter\.com|x\.com)/, 'girlcockx.com');
+			link = link.replace(/(twitter\.com|x\.com)/, 'fixupx.com');
 			link = link.replace(/\/photo\/\d+$/, '');
 			replyText += `${link}\n`;
 		}
@@ -63,8 +63,10 @@ module.exports = (client, message) => {
 
 	// Cat message logic
 	const catWords = /\b(cat\b|gat|meow\b|choki\b|owo\b|fofyra\b|fofy\b|fofi\b)/i;
-	if (catWords.test(message.content)) {
-		message.reply(`https://cataas.com/cat?a=${+Math.floor(Math.random() * 9999)}`);
+	if (Math.random() < 0.01) {
+		if (catWords.test(message.content)) {
+			message.reply(`https://cataas.com/cat?a=${+Math.floor(Math.random() * 9999)}`);
+		}
 	}
 
 	// Pompoarismo
