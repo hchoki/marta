@@ -17,6 +17,11 @@ module.exports = (client) => {
 					.setDescription('A mensagem que o bot deve enviar')
 					.setRequired(true)
 			)
+			.addAttachmentOption(option =>
+				option.setName('anexo')
+					.setDescription('Imagem ou arquivo para enviar junto com a mensagem')
+					.setRequired(false)
+			)
 	];
 
 	// Register commands globally
