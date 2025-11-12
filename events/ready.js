@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = (client) => {
 	client.user.setPresence({
-		activities: [{ name: 'Aguardando Steam Frame Early 2026', type: 4 }],
+		activities: [{ name: 'Só demorou 709 dias para o Valve Frame ser anunciado', type: 4 }],
 	});
 
 	// Register slash commands
