@@ -1,61 +1,44 @@
-function getTimeLeft(eventDate) {
-	const targetDate = new Date(eventDate);
-	const now = new Date();
-	const timeLeft = targetDate - now;
-
-	if (timeLeft < 0) {
-		return { daysLeft: 0, hoursLeft: 0, minutesLeft: 0 };
-	}
-
-	const daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-	const hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-
-	return { daysLeft, hoursLeft, minutesLeft };
-}
-
 function getTimePast(eventDate) {
-    	const targetDate = new Date(eventDate);
-    	const now = new Date();
-    	const timePast = now - targetDate;
+    const targetDate = new Date(eventDate);
+    const now = new Date();
+    const timePast = now - targetDate;
 
-    	if (timePast < 0) {
-        	return { daysLeft: 0, hoursLeft: 0, minutesLeft: 0 };
-    	}
+    if (timePast < 0) {
+        return { daysPast: 0, hoursPast: 0, minutesPast: 0 };
+    }
 
-    	const daysPast = Math.floor(timePast / (1000 * 60 * 60 * 24));
-    	const hoursPast = Math.floor((timePast % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    	const minutesPast = Math.floor((timePast % (1000 * 60 * 60)) / (1000 * 60));
+    const daysPast = Math.floor(timePast / (1000 * 60 * 60 * 24));
+    const hoursPast = Math.floor((timePast % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutesPast = Math.floor((timePast % (1000 * 60 * 60)) / (1000 * 60));
 
-    	return { daysPast, hoursPast, minutesPast };
+    return { daysPast, hoursPast, minutesPast };
 }
 
 module.exports = (eventDate) => {
-    	const { daysPast, hoursPast, minutesPast } = getTimePast(eventDate);
-    	const messages = [
-        	`Fazem ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos que aconteceu o Steam VR Festival! Nada mudou 🎉`,
-        	`Já se passaram ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos desde o Steam VR Festival! Você sente falta? 🕶️`,
-        	`O Steam VR Festival foi há ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos atrás! Como o tempo voa! 🎮`,
-        	`Já faz ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos desde o Steam VR Festival! Você está pronto para o próximo? 💻`,
-        	`O futuro da VR chegou há ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos! O que mudou desde o Steam VR Festival? 🚀`,
-        	`Fazem ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos desde a última imersão no Steam VR Festival! 🎧`,
-        	`Desde o Steam VR Festival já se passaram ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos! Pronto para mais? 🔥`,
-        	`Faz ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos que o Steam VR Festival aconteceu! Bons momentos! 🎉`,
-        	`O Steam VR Festival foi há ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos! Como você se lembra dele? ⏰`,
-        	`Já se passaram ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos desde o início do último Steam VR Festival! 🎊`,
-        	`Seu setup mudou desde o último Steam VR Festival de ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos atrás? 💻`,
-        	`A revolução da realidade virtual começou há ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos, no Steam VR Festival! 🕶️`,
-        	`Já se passaram ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos desde o Steam VR Festival! 🎮`,
-        	`Fazem ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos que o Steam VR Festival aconteceu! Fique atento para o próximo! ⏳`,
-        	`O mundo da VR mudou há ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos com o Steam VR Festival! 🌎`,
-        	`Fazem ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos que vivemos a aventura do Steam VR Festival do ano! 🎢`,
-        	`O último Steam VR Festival foi há ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos! Saudades? 🕶️`,
-        	`O Steam VR Festival terminou há ${daysPast} dias e ${hoursPast} horas e ${minutesPast} minutos! Continuamos na expectativa do próximo! 🎮`,
-        	`Fazem ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos que experimentamos o Steam VR Festival! 💻`,
-        	`Desde o Steam VR Festival, já se passaram ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos! ⏱️`,
-        	'https://tenor.com/view/me-waiting-for-valve-deckard-valve-deckard-skeleton-wheelchair-gif-15912588111334799418',
-    	];
+    const { daysPast, hoursPast, minutesPast } = getTimePast(eventDate);
+    const messages = [
+        `Fazem ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos desde o anúncio do Steam Frame... e ainda nada nas prateleiras. 🕰️`,
+        `Já se passaram ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos desde o anúncio do Steam Frame. Será que ele virou vaporware? 💨`,
+        `O Steam Frame foi anunciado há ${daysPast} dias e ${hoursPast} horas... e ainda não dá pra comprar. Classic Valve. 🔧`,
+        `${daysPast} dias e contando desde o grande anúncio do Steam Frame! Loja? Nenhuma. Esperança? Talvez. 😅`,
+        `Faz ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos que a Valve nos prometeu o Steam Frame. Ainda esperando o botão “Adicionar ao carrinho”. 🛒`,
+        `Steam Frame foi anunciado há ${daysPast} dias e ${hoursPast} horas. O tempo passa, mas o botão de compra não aparece. ⏳`,
+        `Desde o anúncio do Steam Frame já se passaram ${daysPast} dias e ${hoursPast} horas... e seguimos firmes na fé. 🙏`,
+        `O lendário Steam Frame foi revelado há ${daysPast} dias e ${hoursPast} horas. Rumores dizem que ele está em uma caixa de Schrödinger — existe e não existe. 📦`,
+        `Fazem ${daysPast} dias e ${hoursPast} horas que a Valve mostrou o Steam Frame. Ainda sem data. Gabe Newell dorme tranquilo. 😴`,
+        `Há ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos o Steam Frame foi anunciado. Ainda mais raro que o Deckard! 🕶️`,
+        `Já faz ${daysPast} dias e ${hoursPast} horas que o Steam Frame apareceu... e desapareceu da realidade. 🌀`,
+        `Steam Frame anunciado há ${daysPast} dias. Nenhum preço, nenhuma pré-venda, apenas sonhos. 💭`,
+        `Faz ${daysPast} dias e ${hoursPast} horas que o Steam Frame foi mostrado. A Valve realmente ama testar nossa paciência. 🎮`,
+        `Desde o anúncio do Steam Frame (${daysPast} dias atrás), nada mudou. Nem o site, nem o estoque. 😬`,
+        `O Steam Frame foi anunciado há ${daysPast} dias, ${hoursPast} horas e ${minutesPast} minutos. E o mundo continua sem frames. 📺`,
+        `Já são ${daysPast} dias e ${hoursPast} horas desde o anúncio do Steam Frame. O hype morreu, mas a piada vive. 💀`,
+        `Steam Frame anunciado há ${daysPast} dias. A Valve trabalha em silêncio... ou não trabalha. 🤔`,
+        `Faz ${daysPast} dias e ${hoursPast} horas que o Steam Frame foi anunciado. Ainda sem sinal de vida. 🚫`,
+        `O tempo desde o anúncio do Steam Frame: ${daysPast} dias, ${hoursPast} horas, ${minutesPast} minutos. A espera virou estilo de vida. 🧘`,
+        'https://tenor.com/view/valve-steam-waiting-patiently-deckard-gabe-newell-gif-18912588111334799418',
+    ];
 
-   	const randomIndex = Math.floor(Math.random() * messages.length);
-    	return messages[randomIndex];
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    return messages[randomIndex];
 };
