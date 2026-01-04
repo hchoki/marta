@@ -25,6 +25,20 @@ module.exports = (client, message) => {
 		message.reply(replyText);
 	}
 
+	// Bluesky message logic
+	const linkRegexBluesky = /https?:\/\/(www\.)?bsky\.app\/[^\s]+/g;
+	const foundLinksBluesky = message.content.match(linkRegexBluesky);
+
+	if (foundLinksBluesky) {
+		let replyText = '';
+		for (let link of foundLinksBluesky) {
+			link = link.replace('bsky.app', 'bsyy.app');
+			replyText += `${link}\n`;
+		}
+		message.suppressEmbeds(true);
+		message.reply(replyText);
+	}
+
 	// TikTok message logic
 	const linkRegexTikTok = /https?:\/\/(www\.)?tiktok\.com\/[^\s]+/g;
 	const foundLinksTikTok = message.content.match(linkRegexTikTok);
