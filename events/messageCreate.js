@@ -70,10 +70,10 @@ module.exports = (client, message) => {
 
 
 	// VR message logic
-	const vrRelatedWords = /\b(vr|rv|virtual|reality|deckard|decard|pico|quest(pro)?\d*)\b/i;
-	if (vrRelatedWords.test(message.content)) {
-		message.reply(getMessage('2025-11-12T18:00:00'));
-	}
+	//const vrRelatedWords = /\b(vr|rv|virtual|reality|deckard|decard|pico|quest(pro)?\d*)\b/i;
+	//if (vrRelatedWords.test(message.content)) {
+	//	message.reply(getMessage('2025-11-12T18:00:00'));
+	//}
 
 	// Cat message logic
 	const catWords = /\b(cat\b|gat|meow\b|choki\b|owo\b|fofyra\b|fofy\b|fofi\b)/i;
